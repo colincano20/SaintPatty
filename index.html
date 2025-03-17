@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Clover?</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #28a745;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            font-size: 2.5rem;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .yes {
+            background-color: #ffcc00;
+        }
+        .no {
+            background-color: #dc3545;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <h1>Will you be my lucky clover for St. Patrick’s Day? 🍀</h1>
+    <div class="buttons">
+        <button class="yes" onclick="acceptProposal()">Yes! 🍀</button>
+        <button class="no" onmouseover="moveNoButton()">No 😢</button>
+    </div>
+    <script>
+        function acceptProposal() {
+            alert("Yay! You're my lucky clover! 🌈💚");
+        }
+        function moveNoButton() {
+            const button = document.querySelector('.no');
+            const x = Math.random() * (window.innerWidth - 150);
+            const y = Math.random() * (window.innerHeight - 150);
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+        }
+    </script>
+</body>
+</html>
