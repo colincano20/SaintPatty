@@ -19,11 +19,22 @@
             height: 100vh;
             margin: 0;
             overflow: hidden;
+            position: relative;
         }
         h1 {
             font-size: 3rem;
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
             margin-bottom: 20px;
+        }
+        .countdown {
+            font-size: 2rem;
+            font-weight: bold;
+            color: red;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
         }
         .buttons {
             display: flex;
@@ -68,23 +79,65 @@
 </head>
 <body>
     <h1>Will you be my lucky clover for St. Patrick’s Day? 🍀</h1>
+    
+    <!-- Countdown Timer -->
+    <div class="countdown" id="countdown">Loading...</div>
+
     <div class="buttons">
         <button class="yes" onclick="acceptProposal()">Yes! 🍀</button>
-        <button class="no" onclick="rejectProposal()">No 😢</button>
+        <button class="no" onclick = "changeBackgroundRed()" onclick="rejectProposal()">No 😢</button>
     </div>
+    
     <div id="message"></div>
+
+    <!-- Include Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.3"></script>
+
     <script>
         function acceptProposal() {
             const message = document.getElementById("message");
             message.textContent = "Yay! You're my lucky clover! 🌈💚";
             message.style.display = "block";
+
+            // Trigger Confetti Explosion 🎉
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6 }
+            });
         }
 
         function rejectProposal() {
             const message = document.getElementById("message");
-            message.textContent = "Oh no! Maybe next time? 💔🍀";
+            message.textContent = "💔💔💔💔💔💔💔💔💔💔";
             message.style.display = "block";
         }
+        function changeBackgroundRed() {
+            document.body.style.background = "#880808"; // Add quotes around the hex color
+        }
+     
+
+
+        // Countdown Timer Function
+        function updateCountdown() {
+            const stPatricksDay = new Date("March 17, 2025 00:00:00").getTime();
+            const now = new Date().getTime();
+            const timeLeft = stPatricksDay - now;
+
+            if (timeLeft > 0) {
+                const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").innerHTML = `Time until St. Patrick’s Day: <b>${hours} hours, ${minutes} minutes, ${seconds} seconds</b> ⏳`;
+            } else {
+                document.getElementById("countdown").innerHTML = "Happy St. Patrick’s Day! 🎉🍀";
+            }
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Run immediately
     </script>
 </body>
 </html>
