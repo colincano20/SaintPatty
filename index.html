@@ -16,11 +16,13 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh; /* Use min-height instead of height to allow scrolling */
             margin: 0;
-            overflow: hidden;
+            overflow-x: hidden; /* Allow vertical scrolling, prevent horizontal scrolling */
             position: relative;
-        }
+            padding-bottom: 50px; /* Prevent bottom content from being cut off */
+}
+
         h1 {
             font-size: 3rem;
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
