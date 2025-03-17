@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Be My Clover?</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
         body {
             text-align: center;
-            font-family: Arial, sans-serif;
-            background-color: #28a745;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #28a745, #1e7e34);
             color: white;
             display: flex;
             flex-direction: column;
@@ -16,28 +18,51 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden;
         }
         h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
         }
         .buttons {
-            margin-top: 20px;
+            display: flex;
+            gap: 20px;
         }
         button {
             font-size: 1.5rem;
-            padding: 10px 20px;
-            margin: 10px;
+            padding: 15px 30px;
             border: none;
-            border-radius: 10px;
+            border-radius: 50px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         .yes {
-            background-color: #ffcc00;
+            background: linear-gradient(135deg, #ffcc00, #ff9900);
+            color: white;
+        }
+        .yes:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(255, 204, 0, 0.5);
         }
         .no {
-            background-color: #dc3545;
-            position: absolute;
+            background: linear-gradient(135deg, #ff4d4d, #cc0000);
+            color: white;
+        }
+        .no:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(255, 77, 77, 0.5);
+        }
+        #message {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
@@ -45,18 +70,20 @@
     <h1>Will you be my lucky clover for St. Patrick’s Day? 🍀</h1>
     <div class="buttons">
         <button class="yes" onclick="acceptProposal()">Yes! 🍀</button>
-        <button class="no" onmouseover="moveNoButton()">No 😢</button>
+        <button class="no" onclick="rejectProposal()">No 😢</button>
     </div>
+    <div id="message"></div>
     <script>
         function acceptProposal() {
-            alert("Yay! You're my lucky clover! 🌈💚");
+            const message = document.getElementById("message");
+            message.textContent = "Yay! You're my lucky clover! 🌈💚";
+            message.style.display = "block";
         }
-        function moveNoButton() {
-            const button = document.querySelector('.no');
-            const x = Math.random() * (window.innerWidth - 150);
-            const y = Math.random() * (window.innerHeight - 150);
-            button.style.left = `${x}px`;
-            button.style.top = `${y}px`;
+
+        function rejectProposal() {
+            const message = document.getElementById("message");
+            message.textContent = "Oh no! Maybe next time? 💔🍀";
+            message.style.display = "block";
         }
     </script>
 </body>
