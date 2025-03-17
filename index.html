@@ -75,6 +75,25 @@
             border-radius: 15px;
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
         }
+        /* Rain effect */
+        .rain-drop {
+            position: fixed;
+            width: 3px;
+            height: 15px;
+            background-color: lightblue;
+            opacity: 0.7;
+            animation: rainFall linear infinite;
+        }
+        @keyframes rainFall {
+            0% {
+                transform: translateY(-100vh);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -85,7 +104,7 @@
 
     <div class="buttons">
         <button class="yes" onclick="acceptProposal()">Yes! 🍀</button>
-        <button class="no" onclick = "changeBackgroundRed()" onclick="rejectProposal()">No 😢</button>
+        <button class="no" onclick="rejectProposal()">No 😢</button>
     </div>
     
     <div id="message"></div>
@@ -95,9 +114,12 @@
 
     <script>
         function acceptProposal() {
-            const message = document.getElementById("message");
-            message.textContent = "Yay! You're my lucky clover! 🌈💚";
-            message.style.display = "block";
+            document.body.style.background = "linear-gradient(135deg, #28a745, #1e7e34)"; // Reset background
+            document.getElementById("message").textContent = "Yay! You're my lucky clover! 🌈💚";
+            document.getElementById("message").style.display = "block";
+
+            // Remove rain when "Yes" is clicked
+            removeRain();
 
             // Trigger Confetti Explosion 🎉
             confetti({
@@ -108,15 +130,31 @@
         }
 
         function rejectProposal() {
-            const message = document.getElementById("message");
-            message.textContent = "💔💔💔💔💔💔💔💔💔💔";
-            message.style.display = "block";
-        }
-        function changeBackgroundRed() {
-            document.body.style.background = "#880808"; // Add quotes around the hex color
-        }
-     
+            document.body.style.background = "#880808"; // Change background to red
+            document.getElementById("message").textContent = "💔💔💔💔💔💔💔💔💔💔";
+            document.getElementById("message").style.display = "block";
 
+            // Start rain effect
+            startRain();
+        }
+
+        function startRain() {
+            for (let i = 0; i < 50; i++) { // Number of rain drops
+                let drop = document.createElement("div");
+                drop.classList.add("rain-drop");
+
+                // Random positioning
+                drop.style.left = Math.random() * window.innerWidth + "px";
+                drop.style.animationDuration = (Math.random() * 2 + 1) + "s"; // Varying speeds
+                drop.style.animationDelay = Math.random() * 2 + "s"; // Staggered start
+
+                document.body.appendChild(drop);
+            }
+        }
+
+        function removeRain() {
+            document.querySelectorAll(".rain-drop").forEach(drop => drop.remove());
+        }
 
         // Countdown Timer Function
         function updateCountdown() {
