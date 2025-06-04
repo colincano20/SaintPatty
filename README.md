@@ -7,7 +7,7 @@ A playful, single-page web app to celebrate St. Patrick's Day. The page asks "Wi
 - **Interactive question** with **Yes** and **No** buttons.
 - Selecting **Yes** triggers a confetti explosion and a friendly message.
 - Selecting **No** turns the background red and starts a rain animation.
-- **Countdown timer** showing the time remaining until March 17, 2025.
+- **Countdown timer** showing the time remaining until March 17, 2026.
 - Pure HTML, CSS, and JavaScript; no build tools or dependencies needed.
 
 ## Getting Started
