@@ -159,24 +159,28 @@
         }
 
         // Countdown Timer Function
+        let countdownInterval;
         function updateCountdown() {
             const stPatricksDay = new Date("March 17, 2025 00:00:00").getTime();
             const now = new Date().getTime();
             const timeLeft = stPatricksDay - now;
 
             if (timeLeft > 0) {
-                const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-                document.getElementById("countdown").innerHTML = `Time until St. Patrick’s Day: <b>${hours} hours, ${minutes} minutes, ${seconds} seconds</b> ⏳`;
+                document.getElementById("countdown").innerHTML =
+                    `Time until St. Patrick’s Day: <b>${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds</b> ⏳`;
             } else {
                 document.getElementById("countdown").innerHTML = "Happy St. Patrick’s Day! 🎉🍀";
+                clearInterval(countdownInterval);
             }
         }
 
         // Update countdown every second
-        setInterval(updateCountdown, 1000);
+        countdownInterval = setInterval(updateCountdown, 1000);
         updateCountdown(); // Run immediately
     </script>
 </body>
