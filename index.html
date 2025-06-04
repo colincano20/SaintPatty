@@ -141,6 +141,9 @@
         }
 
         function startRain() {
+            // Clear any existing drops before creating new ones
+            removeRain();
+
             for (let i = 0; i < 50; i++) { // Number of rain drops
                 let drop = document.createElement("div");
                 drop.classList.add("rain-drop");
